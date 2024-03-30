@@ -1,152 +1,114 @@
-.arch armv7-a
-.fpu vfpv3
-.eabi_attribute 67, "2.09"    @ Version EABI
-.eabi_attribute 6, 10         @ ABI de punto flotante duro
-
 .section .data
 
-file_path:      .asciz "prueba.txt"
-buffer:         .space 2205      @ Tamaño del buffer para contener el contenido del archivo
-ejemploFloat:   .float 4.566
-constante:      .float 75.0
-buffer_addr:    .word 0
-direccion:      .word 0x100
+file_path:          .asciz "prueba.txt"
+output_path:        .asciz "output.txt"
+input_buffer:       .space 100        @ Buffer para leer datos del archivo de entrada
+output_buffer:      .space 100        @ Buffer para escribir datos en el archivo de salida
 
-.align 1
+.balign 1
 
 .section .text
 
 .globl _start
 
-@------------------------------------- LECTURA DEL ARCHVO .TXT -----------------------------------
+@------------------------------------- LECTURA DEL ARCHIVO .TXT -----------------------------------
 _start:
-    @ Abrir el archivo
-    ldr r0, =file_path
-    mov r1, #2      @ O_RDONLY (Modo de lectura)
-    mov r2, #0
-    mov r7, #5      @ Codigo de llamada al sistema para abrir el archivo
+    @ Abrir el archivo de entrada
+    mov r7, #5                @ Código de llamada al sistema para abrir el archivo
+    ldr r0, =file_path        @ Archivo que se va a abrir
+    mov r1, #2                @ O_RDONLY (Modo de lectura)
     swi 0
 
-    @ Verificar errores al abrir el archivo (r0 contiene el descriptor del archivo o el código de error)
+    @ Verificar errores al abrir el archivo de entrada (r0 contiene el descriptor del archivo o el código de error)
     cmp r0, #-1
     beq error
 
-    mov r9, r0 @ Almacenar el descriptor del archivo en r9
-    ldr r8, =buffer  @ Puntero al búfer
-    mov r10, #0 @ Contador de bytes leídos
-    ldr r6, =direccion @inicializar direccion
-@----------------------------------------------------------------------------------------------------
+    mov r9, r0                @ Almacenar el descriptor del archivo en r9
+    ldr r8, =input_buffer     @ Puntero al búfer
+    mov r6, #0                @ Contador de bytes leídos
 
-@////////////////////// NUMEROS POSITIVOS (CONVERSION Y PARSEO) //////////////////////////
-@ Bucle para leer valores del archivo y convertirlos a enteros
+    @ Abrir el archivo de salida
+    mov r7, #8                @ Código de llamada al sistema para crear el archivo de salida
+    ldr r0, =output_path      @ Archivo que se va a abrir
+    mov r1, #0777             @ Permisos de archivo (rw-r--r--)
+    swi 0
+
+    @ Verificar errores al abrir el archivo de salida
+    cmp r0, #-1
+    beq error_output
+
+    mov r10, r0               @ Almacenar el descriptor del archivo de salida en r11
+    ldr r4, =output_buffer    @ Puntero al búfer de salida
+    mov r6, #0                @ Contador de bytes leídos
+
 read_loop:
-    @ Leer 17 bytes del archivo
-    mov r0, r9
-    ldr r1, =buffer
-    mov r2, #17       @ Leer 17 bytes a la vez
-    mov r7, #3       @ Código de llamada al sistema para leer desde el archivo
+    @ Leer una línea del archivo de entrada
+    mov r7, #3                @ Código de llamada al sistema para leer desde el archivo
+    mov r0, r9                @ Descriptor de archivo
+    ldr r1, =input_buffer     @ Puntero al buffer
+    mov r2, #5                @ Tamaño máximo de línea (incluyendo el caracter de nueva línea)
     swi 0
 
     @ Comprobar si se alcanzó el final del archivo
     cmp r0, #0
     beq exit
 
-    @ Procesar los bytes leídos
-    mov r3, r2         @ Número de bytes leídos
-process_bytes:
-    @ Convertir cada byte leído a un entero
-    ldrb r4, [r8], #1  @ Cargar el byte en r4 y avanzar el puntero al siguiente byte
-    cmp r4, #'-'      @ Comprobar si el byte es un signo negativo
-    beq negative
+    @ Procesar la línea leída
+    mov r3, r2                @ Tamaño de la línea leída
+    bl process_line
+
+    b read_loop
+
+@------------------- PROCESAR UNA LÍNEA -------------------------------------------------
+process_line:
+    @Procesar el dato que se va escribir
     
-    sub r4, r4, #'0'  @ Convertir ASCII a entero (suponiendo que el byte representa un dígito)
-
-    @ Comparación de SALTO DE LÍNEA
-    cmp r4, #-38
-    beq store_data
-
-    @ Operación para números de 2 a 3 dígitos
-    ldr r11, =10
-    mul r10, r10, r11    @ Multiplicar r10 por 10 
-    add r10, r10, r4    @ Almacenar temporalmente el dato en r4
-
-    subs r3, r3, #1    @ Decrementar el contador de bytes procesados
-    bne process_bytes  @ Si no hemos procesado todos los bytes, continuar el bucle
-
-    b read_loop        @ Volver a leer más bytes del archivo
-
-@//////////////////////////////////////////////////////////////////////////////////////////
-
-@////////////////////// NUMEROS NEGATIVOS (CONVERSION Y PARSEO) //////////////////////////
-negative:
-     @ Leer 17 bytes del archivo
-    mov r0, r9
-    ldr r1, =buffer
-    mov r2, #17       @ Leer 17 bytes a la vez
-    mov r7, #3       @ Código de llamada al sistema para leer desde el archivo
+    @ Escribir los datos procesados en el archivo de salida
+    mov r7, #4                @ Código de llamada al sistema para escribir en el archivo
+    mov r0, r10               @ Descriptor de archivo de salida
+    mov r1, r8                @ Store the value in the buffer
+    mov r2, r3                @ Tamaño de los datos a escribir (asumiendo que se escriben enteros)
     swi 0
 
-    @ Comprobar si se alcanzó el final del archivo
-    cmp r0, #0
-    beq exit
+    bx lr                     @ Retornar
 
-    @ Procesar los bytes leídos
-    mov r3, r2         @ Número de bytes leídos
-process_bytes_neg:
-    @ Convertir cada byte leído a un entero
-    ldrb r4, [r8], #17  @ Cargar el byte en r4 y avanzar el puntero al siguiente byte
-
-    @ Comparación de SALTO DE LÍNEA
-    cmp r4, #-38
-    beq store_data_neg
-
-    sub r4, r4, #'0'  @ Convertir ASCII a entero (suponiendo que el byte representa un dígito)
-
-    ldr r11, =10
-    mul r10, r10, r11      @ Multiplicar r10 por 10 
-    add r10, r10, r4    @ Almacenar temporalmente el dato en r4
-
-    subs r3, r3, #17    @ Decrementar el contador de bytes procesados
-    bne process_bytes_neg  @ Si no hemos procesado todos los bytes, continuar el bucle
-
-    b negative         @ Volver a leer más bytes del archivo
-@////////////////////////////////////////////////////////////////////////////////////////
-
-@------------------- GUARDADO EN MEMORIA DATOS ORIGINALES --------------------
-store_data:
-    STRB R10, [R6], #17
-    mov r10, #0 @DEBUG i r
-    b read_loop
-
-store_data_neg:    
-    neg r10,r10 
-    STRB R10, [R6], #17 
-    mov r10, #0 @DEBUG i r
-    b read_loop
-@-----------------------------------------------------------------------------
-
-
-@------------------- SALIDA DEL PROGRAMA -------------------------------------
+@------------------- SALIDA DEL PROGRAMA ----------------------------------------------
 exit:
-    @ Cerrar el archivo
+    @ Cerrar el archivo de entrada
     mov r0, r9
-    mov r7, #6        @ Código de llamada al sistema para cerrar el archivo
+    mov r7, #6                @ Código de llamada al sistema para cerrar el archivo
     swi 0
 
-    mov r7, #1        @ Código de llamada al sistema para salir del programa
+    @ Cerrar el archivo de salida
+    mov r0, r10
+    mov r7, #6                @ Código de llamada al sistema para cerrar el archivo
     swi 0
-@------------------------------------------------------------------------------
 
-@--------------------  MANEJO DE ERRORES -------------------------------------
+    mov r7, #1                @ Código de llamada al sistema para salir del programa
+    swi 0
+
+@--------------------  MANEJO DE ERRORES -----------------------------------------------
 error:
-    @ Manejo de errores al abrir el archivo
-    mov r0, #1        @ Descriptor de archivo para stderr
+    @ Manejo de errores al abrir el archivo de entrada
+    mov r0, #1                @ Descriptor de archivo para stderr
     ldr r1, =error_msg
     ldr r2, =error_msg_len
-    mov r7, #4        @ Código de llamada al sistema para escribir en la consola
+    mov r7, #4                @ Código de llamada al sistema para escribir en la consola
     svc 0
     b exit
-@------------------------------------------------------------------------------
 
-error_msg:      .asciz "Error al abrir el archivo.\n"
-error_msg_len = . - error_msg
+error_output:
+    @ Manejo de errores al abrir el archivo de salida
+    mov r0, #1                @ Descriptor de archivo para stderr
+    ldr r1, =error_output_msg
+    ldr r2, =error_output_msg_len
+    mov r7, #4                @ Código de llamada al sistema para escribir en la consola
+    svc 0
+    b exit
+@----------------------------------------------------------------------------------------
+
+error_msg:              .asciz "Error al abrir el archivo de entrada.\n"
+error_msg_len =         . - error_msg
+
+error_output_msg:       .asciz "Error al abrir el archivo de salida.\n"
+error_output_msg_len =  . - error_output_msg
