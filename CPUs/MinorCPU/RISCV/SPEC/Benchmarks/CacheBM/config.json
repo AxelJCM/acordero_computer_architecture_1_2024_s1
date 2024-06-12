@@ -142,7 +142,7 @@
                     "numThreads": 1
                 },
                 "checker": null,
-                "clk_domain": "system.cpu_clk_domain",
+                "clk_domain": "system.clk_domain",
                 "cpu_id": 0,
                 "decodeCycleInput": true,
                 "decodeInputBufferSize": 3,
@@ -1193,7 +1193,7 @@
                             "cxx_class": "gem5::RiscvISA::Walker",
                             "name": "walker",
                             "path": "system.cpu.mmu.dtb.walker",
-                            "clk_domain": "system.cpu_clk_domain",
+                            "clk_domain": "system.clk_domain",
                             "eventq_index": 0,
                             "num_squash_per_cycle": 4,
                             "pma_checker": "system.cpu.mmu.pma_checker",
@@ -1237,7 +1237,7 @@
                             "cxx_class": "gem5::RiscvISA::Walker",
                             "name": "walker",
                             "path": "system.cpu.mmu.itb.walker",
-                            "clk_domain": "system.cpu_clk_domain",
+                            "clk_domain": "system.clk_domain",
                             "eventq_index": 0,
                             "num_squash_per_cycle": 4,
                             "pma_checker": "system.cpu.mmu.pma_checker",
@@ -1358,7 +1358,7 @@
                         "0:18446744073709551615"
                     ],
                     "assoc": 2,
-                    "clk_domain": "system.cpu_clk_domain",
+                    "clk_domain": "system.clk_domain",
                     "clusivity": "mostly_incl",
                     "compressor": null,
                     "data_latency": 2,
@@ -1395,7 +1395,7 @@
                     },
                     "response_latency": 2,
                     "sequential_access": false,
-                    "size": 262144,
+                    "size": 1048576,
                     "system": "system",
                     "tag_latency": 2,
                     "tags": {
@@ -1405,7 +1405,7 @@
                         "path": "system.cpu.dcache.tags",
                         "assoc": 2,
                         "block_size": 64,
-                        "clk_domain": "system.cpu_clk_domain",
+                        "clk_domain": "system.clk_domain",
                         "entry_size": 64,
                         "eventq_index": 0,
                         "indexing_policy": {
@@ -1416,7 +1416,7 @@
                             "assoc": 2,
                             "entry_size": 64,
                             "eventq_index": 0,
-                            "size": 262144
+                            "size": 1048576
                         },
                         "power_model": [],
                         "power_state": {
@@ -1434,7 +1434,7 @@
                         },
                         "replacement_policy": "system.cpu.dcache.replacement_policy",
                         "sequential_access": false,
-                        "size": 262144,
+                        "size": 1048576,
                         "system": "system",
                         "tag_latency": 2,
                         "warmup_percentage": 0
@@ -1464,7 +1464,7 @@
                         "0:18446744073709551615"
                     ],
                     "assoc": 2,
-                    "clk_domain": "system.cpu_clk_domain",
+                    "clk_domain": "system.clk_domain",
                     "clusivity": "mostly_incl",
                     "compressor": null,
                     "data_latency": 2,
@@ -1511,7 +1511,7 @@
                         "path": "system.cpu.dtb_walker_cache.tags",
                         "assoc": 2,
                         "block_size": 64,
-                        "clk_domain": "system.cpu_clk_domain",
+                        "clk_domain": "system.clk_domain",
                         "entry_size": 64,
                         "eventq_index": 0,
                         "indexing_policy": {
@@ -1570,7 +1570,7 @@
                         "0:18446744073709551615"
                     ],
                     "assoc": 2,
-                    "clk_domain": "system.cpu_clk_domain",
+                    "clk_domain": "system.clk_domain",
                     "clusivity": "mostly_incl",
                     "compressor": null,
                     "data_latency": 2,
@@ -1607,7 +1607,7 @@
                     },
                     "response_latency": 2,
                     "sequential_access": false,
-                    "size": 262144,
+                    "size": 1048576,
                     "system": "system",
                     "tag_latency": 2,
                     "tags": {
@@ -1617,7 +1617,7 @@
                         "path": "system.cpu.icache.tags",
                         "assoc": 2,
                         "block_size": 64,
-                        "clk_domain": "system.cpu_clk_domain",
+                        "clk_domain": "system.clk_domain",
                         "entry_size": 64,
                         "eventq_index": 0,
                         "indexing_policy": {
@@ -1628,7 +1628,7 @@
                             "assoc": 2,
                             "entry_size": 64,
                             "eventq_index": 0,
-                            "size": 262144
+                            "size": 1048576
                         },
                         "power_model": [],
                         "power_state": {
@@ -1646,7 +1646,7 @@
                         },
                         "replacement_policy": "system.cpu.icache.replacement_policy",
                         "sequential_access": false,
-                        "size": 262144,
+                        "size": 1048576,
                         "system": "system",
                         "tag_latency": 2,
                         "warmup_percentage": 0
@@ -1676,7 +1676,7 @@
                         "0:18446744073709551615"
                     ],
                     "assoc": 2,
-                    "clk_domain": "system.cpu_clk_domain",
+                    "clk_domain": "system.clk_domain",
                     "clusivity": "mostly_incl",
                     "compressor": null,
                     "data_latency": 2,
@@ -1723,7 +1723,7 @@
                         "path": "system.cpu.itb_walker_cache.tags",
                         "assoc": 2,
                         "block_size": 64,
-                        "clk_domain": "system.cpu_clk_domain",
+                        "clk_domain": "system.clk_domain",
                         "entry_size": 64,
                         "eventq_index": 0,
                         "indexing_policy": {
@@ -1865,7 +1865,7 @@
             },
             "response_latency": 20,
             "sequential_access": false,
-            "size": 262144,
+            "size": 1048576,
             "system": "system",
             "tag_latency": 20,
             "tags": {
@@ -1886,7 +1886,7 @@
                     "assoc": 1,
                     "entry_size": 64,
                     "eventq_index": 0,
-                    "size": 262144
+                    "size": 1048576
                 },
                 "power_model": [],
                 "power_state": {
@@ -1904,7 +1904,7 @@
                 },
                 "replacement_policy": "system.l2.replacement_policy",
                 "sequential_access": false,
-                "size": 262144,
+                "size": 1048576,
                 "system": "system",
                 "tag_latency": 20,
                 "warmup_percentage": 0

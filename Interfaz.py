@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import matplotlib.pyplot as plt
 import matplotlib
-import os
+import os 
 
 matplotlib.use('TkAgg')
 
@@ -12,18 +12,18 @@ class CPUConfigLogic:
         
         self.cache_paths = {
             "MinorCPU": [
-                "CPUs/MinorCPU/ARM/SPEC/CacheStats/stats_4kB.txt",
-                "CPUs/MinorCPU/ARM/SPEC/CacheStats/stats_16kB.txt",
-                "CPUs/MinorCPU/ARM/SPEC/CacheStats/stats_64kB.txt",
-                "CPUs/MinorCPU/ARM/SPEC/CacheStats/stats_256kB.txt",
-                "CPUs/MinorCPU/ARM/SPEC/CacheStats/stats_1MB.txt"
+                "CPUs/MinorCPU/ARM/SPEC/CacheStats/stats2kB.txt",
+                "CPUs/MinorCPU/ARM/SPEC/CacheStats/stats16kB.txt",
+                "CPUs/MinorCPU/ARM/SPEC/CacheStats/stats64kB.txt",
+                "CPUs/MinorCPU/ARM/SPEC/CacheStats/stats256kB.txt",
+                "CPUs/MinorCPU/ARM/SPEC/CacheStats/stats1MB.txt"
             ],
             "O3CPU": [
-                "CPUs/O3CPU/ARM/SPEC/CacheStats/stats_4kB.txt",
-                "CPUs/O3CPU/ARM/SPEC/CacheStats/stats_16kB.txt",
-                "CPUs/O3CPU/ARM/SPEC/CacheStats/stats_64kB.txt",
-                "CPUs/O3CPU/ARM/SPEC/CacheStats/stats_256kB.txt",
-                "CPUs/O3CPU/ARM/SPEC/CacheStats/stats_1MB.txt"
+                "CPUs/O3CPU/ARM/SPEC/CacheStats/stats2kB.txt",
+                "CPUs/O3CPU/ARM/SPEC/CacheStats/stats16kB.txt",
+                "CPUs/O3CPU/ARM/SPEC/CacheStats/stats64kB.txt",
+                "CPUs/O3CPU/ARM/SPEC/CacheStats/stats256kB.txt",
+                "CPUs/O3CPU/ARM/SPEC/CacheStats/stats1MB.txt"
             ]
         }
 
@@ -47,16 +47,12 @@ class CPUConfigLogic:
         self.branch_paths = {
             "MinorCPU": [
                 "CPUs/MinorCPU/ARM/SPEC/BPStats/stats_TournamentBP.txt",
-                "CPUs/MinorCPU/ARM/SPEC/BPStats/stats_BiModeBP.txt",
                 "CPUs/MinorCPU/ARM/SPEC/BPStats/stats_LocalBP.txt",
-                "CPUs/MinorCPU/ARM/SPEC/BPStats/stats_LTAGE.txt",
                 "CPUs/MinorCPU/ARM/SPEC/BPStats/stats_TAGE.txt"
             ],
             "O3CPU": [
                 "CPUs/O3CPU/ARM/SPEC/BPStats/stats_TournamentBP.txt",
-                "CPUs/O3CPU/ARM/SPEC/BPStats/stats_BiModeBP.txt",
                 "CPUs/O3CPU/ARM/SPEC/BPStats/stats_LocalBP.txt",
-                "CPUs/O3CPU/ARM/SPEC/BPStats/stats_LTAGE.txt",
                 "CPUs/O3CPU/ARM/SPEC/BPStats/stats_TAGE.txt"
             ]
         }
@@ -248,7 +244,7 @@ class CPUConfigGUI:
         replacement_frame.pack(pady=5)
 
         branch_frame, branch_checkboxes = self.create_checkbox_frame(
-            master, "Branch Predictor:", ["TournamentBP", "BiModeBP", "LocalBP", "LTAGE", "TAGE"], 
+            master, "Branch Predictor:", ["TournamentBP", "LocalBP", "TAGE"], 
             [path.replace("MinorCPU", cpu_type) for path in logic.branch_paths[cpu_type]], arch_var
         )
         branch_frame.pack(pady=5)
@@ -257,7 +253,7 @@ class CPUConfigGUI:
         parsec_label.pack(pady=10)
 
         cache_parsec_frame, cache_parsec_checkboxes = self.create_checkbox_frame(
-            master, "Cache Size:", ["4kB", "16kB", "64kB", "256kB", "1MB"], 
+            master, "Cache Size:", ["2kB", "16kB", "64kB", "256kB", "1MB"], 
             [path.replace("SPEC", "PARSEC").replace("MinorCPU", cpu_type) for path in logic.cache_paths[cpu_type]], arch_var
         )
         cache_parsec_frame.pack(pady=5)
@@ -269,7 +265,7 @@ class CPUConfigGUI:
         replacement_parsec_frame.pack(pady=5)
 
         branch_parsec_frame, branch_parsec_checkboxes = self.create_checkbox_frame(
-            master, "Branch Predictor:", ["TournamentBP", "BiModeBP", "LocalBP", "LTAGE", "TAGE"], 
+            master, "Branch Predictor:", ["TournamentBP", "LocalBP", "TAGE"], 
             [path.replace("SPEC", "PARSEC").replace("MinorCPU", cpu_type) for path in logic.branch_paths[cpu_type]], arch_var
         )
         branch_parsec_frame.pack(pady=5)

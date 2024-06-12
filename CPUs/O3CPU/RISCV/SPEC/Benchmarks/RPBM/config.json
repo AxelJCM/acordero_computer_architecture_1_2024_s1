@@ -1523,8 +1523,8 @@
             "prefetcher": null,
             "replace_expansions": true,
             "replacement_policy": {
-                "type": "MRURP",
-                "cxx_class": "gem5::replacement_policy::MRU",
+                "type": "RandomRP",
+                "cxx_class": "gem5::replacement_policy::Random",
                 "name": "replacement_policy",
                 "path": "system.l2.replacement_policy",
                 "eventq_index": 0

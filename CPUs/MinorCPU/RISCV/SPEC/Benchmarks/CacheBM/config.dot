@@ -33,6 +33,54 @@ style="rounded, filled";
 tooltip="domains&#61;&#10;\enable&#61;false&#10;\eventq_index&#61;0&#10;\sys_clk_domain&#61;system.clk_domain&#10;\transition_latency&#61;100000000";
 }
 
+subgraph cluster_system_voltage_domain {
+color="#000000";
+fillcolor="#bab6ae";
+fontcolor="#000000";
+fontname=Arial;
+fontsize=14;
+label="voltage_domain \n: VoltageDomain";
+shape=box;
+style="rounded, filled";
+tooltip="eventq_index&#61;0&#10;\voltage&#61;1.0";
+}
+
+subgraph cluster_system_clk_domain {
+color="#000000";
+fillcolor="#bab6ae";
+fontcolor="#000000";
+fontname=Arial;
+fontsize=14;
+label="clk_domain \n: SrcClockDomain";
+shape=box;
+style="rounded, filled";
+tooltip="clock&#61;1000&#10;\domain_id&#61;-1&#10;\eventq_index&#61;0&#10;\init_perf_level&#61;0&#10;\voltage_domain&#61;system.voltage_domain";
+}
+
+subgraph cluster_system_cpu_voltage_domain {
+color="#000000";
+fillcolor="#bab6ae";
+fontcolor="#000000";
+fontname=Arial;
+fontsize=14;
+label="cpu_voltage_domain \n: VoltageDomain";
+shape=box;
+style="rounded, filled";
+tooltip="eventq_index&#61;0&#10;\voltage&#61;1.0";
+}
+
+subgraph cluster_system_cpu_clk_domain {
+color="#000000";
+fillcolor="#bab6ae";
+fontcolor="#000000";
+fontname=Arial;
+fontsize=14;
+label="cpu_clk_domain \n: SrcClockDomain";
+shape=box;
+style="rounded, filled";
+tooltip="clock&#61;500&#10;\domain_id&#61;-1&#10;\eventq_index&#61;0&#10;\init_perf_level&#61;0&#10;\voltage_domain&#61;system.cpu_voltage_domain";
+}
+
 subgraph cluster_system_cpu {
 color="#000000";
 fillcolor="#bbc6d9";
@@ -42,7 +90,7 @@ fontsize=14;
 label="cpu \n: RiscvMinorCPU";
 shape=box;
 style="rounded, filled";
-tooltip="branchPred&#61;system.cpu.branchPred&#10;\checker&#61;Null&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\cpu_id&#61;0&#10;\decodeCycleInput&#61;true&#10;\decodeInputBufferSize&#61;3&#10;\decodeInputWidth&#61;2&#10;\decodeToExecuteForwardDelay&#61;1&#10;\decoder&#61;system.cpu.decoder&#10;\do_checkpoint_insts&#61;true&#10;\do_statistics_insts&#61;true&#10;\enableIdling&#61;true&#10;\eventq_index&#61;0&#10;\executeAllowEarlyMemoryIssue&#61;true&#10;\executeBranchDelay&#61;1&#10;\executeCommitLimit&#61;2&#10;\executeCycleInput&#61;true&#10;\executeFuncUnits&#61;system.cpu.executeFuncUnits&#10;\executeInputBufferSize&#61;7&#10;\executeInputWidth&#61;2&#10;\executeIssueLimit&#61;2&#10;\executeLSQMaxStoreBufferStoresPerCycle&#61;2&#10;\executeLSQRequestsQueueSize&#61;1&#10;\executeLSQStoreBufferSize&#61;5&#10;\executeLSQTransfersQueueSize&#61;2&#10;\executeMaxAccessesInMemory&#61;2&#10;\executeMemoryCommitLimit&#61;1&#10;\executeMemoryIssueLimit&#61;1&#10;\executeMemoryWidth&#61;0&#10;\executeSetTraceTimeOnCommit&#61;true&#10;\executeSetTraceTimeOnIssue&#61;false&#10;\fetch1FetchLimit&#61;1&#10;\fetch1LineSnapWidth&#61;0&#10;\fetch1LineWidth&#61;0&#10;\fetch1ToFetch2BackwardDelay&#61;1&#10;\fetch1ToFetch2ForwardDelay&#61;1&#10;\fetch2CycleInput&#61;true&#10;\fetch2InputBufferSize&#61;2&#10;\fetch2ToDecodeForwardDelay&#61;1&#10;\function_trace&#61;false&#10;\function_trace_start&#61;0&#10;\interrupts&#61;system.cpu.interrupts&#10;\isa&#61;system.cpu.isa&#10;\max_insts_all_threads&#61;0&#10;\max_insts_any_thread&#61;300000000&#10;\mmu&#61;system.cpu.mmu&#10;\numThreads&#61;1&#10;\power_gating_on_idle&#61;false&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.power_state&#10;\progress_interval&#61;0&#10;\pwr_gating_latency&#61;300&#10;\simpoint_start_insts&#61;&#10;\socket_id&#61;0&#10;\switched_out&#61;false&#10;\syscallRetryLatency&#61;10000&#10;\system&#61;system&#10;\threadPolicy&#61;RoundRobin&#10;\tracer&#61;system.cpu.tracer&#10;\workload&#61;system.cpu.workload";
+tooltip="branchPred&#61;system.cpu.branchPred&#10;\checker&#61;Null&#10;\clk_domain&#61;system.clk_domain&#10;\cpu_id&#61;0&#10;\decodeCycleInput&#61;true&#10;\decodeInputBufferSize&#61;3&#10;\decodeInputWidth&#61;2&#10;\decodeToExecuteForwardDelay&#61;1&#10;\decoder&#61;system.cpu.decoder&#10;\do_checkpoint_insts&#61;true&#10;\do_statistics_insts&#61;true&#10;\enableIdling&#61;true&#10;\eventq_index&#61;0&#10;\executeAllowEarlyMemoryIssue&#61;true&#10;\executeBranchDelay&#61;1&#10;\executeCommitLimit&#61;2&#10;\executeCycleInput&#61;true&#10;\executeFuncUnits&#61;system.cpu.executeFuncUnits&#10;\executeInputBufferSize&#61;7&#10;\executeInputWidth&#61;2&#10;\executeIssueLimit&#61;2&#10;\executeLSQMaxStoreBufferStoresPerCycle&#61;2&#10;\executeLSQRequestsQueueSize&#61;1&#10;\executeLSQStoreBufferSize&#61;5&#10;\executeLSQTransfersQueueSize&#61;2&#10;\executeMaxAccessesInMemory&#61;2&#10;\executeMemoryCommitLimit&#61;1&#10;\executeMemoryIssueLimit&#61;1&#10;\executeMemoryWidth&#61;0&#10;\executeSetTraceTimeOnCommit&#61;true&#10;\executeSetTraceTimeOnIssue&#61;false&#10;\fetch1FetchLimit&#61;1&#10;\fetch1LineSnapWidth&#61;0&#10;\fetch1LineWidth&#61;0&#10;\fetch1ToFetch2BackwardDelay&#61;1&#10;\fetch1ToFetch2ForwardDelay&#61;1&#10;\fetch2CycleInput&#61;true&#10;\fetch2InputBufferSize&#61;2&#10;\fetch2ToDecodeForwardDelay&#61;1&#10;\function_trace&#61;false&#10;\function_trace_start&#61;0&#10;\interrupts&#61;system.cpu.interrupts&#10;\isa&#61;system.cpu.isa&#10;\max_insts_all_threads&#61;0&#10;\max_insts_any_thread&#61;300000000&#10;\mmu&#61;system.cpu.mmu&#10;\numThreads&#61;1&#10;\power_gating_on_idle&#61;false&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.power_state&#10;\progress_interval&#61;0&#10;\pwr_gating_latency&#61;300&#10;\simpoint_start_insts&#61;&#10;\socket_id&#61;0&#10;\switched_out&#61;false&#10;\syscallRetryLatency&#61;10000&#10;\system&#61;system&#10;\threadPolicy&#61;RoundRobin&#10;\tracer&#61;system.cpu.tracer&#10;\workload&#61;system.cpu.workload";
 system_cpu_icache_port [color="#000000", fillcolor="#959ead", fontcolor="#000000", fontname=Arial, fontsize=14, label=icache_port, shape=box, style="rounded, filled"];
 system_cpu_dcache_port [color="#000000", fillcolor="#959ead", fontcolor="#000000", fontname=Arial, fontsize=14, label=dcache_port, shape=box, style="rounded, filled"];
 subgraph cluster_system_cpu_mmu {
@@ -74,7 +122,7 @@ fontsize=14;
 label="walker \n: RiscvPagetableWalker";
 shape=box;
 style="rounded, filled";
-tooltip="clk_domain&#61;system.cpu_clk_domain&#10;\eventq_index&#61;0&#10;\num_squash_per_cycle&#61;4&#10;\pma_checker&#61;system.cpu.mmu.pma_checker&#10;\pmp&#61;system.cpu.mmu.pmp&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.mmu.itb.walker.power_state&#10;\system&#61;system";
+tooltip="clk_domain&#61;system.clk_domain&#10;\eventq_index&#61;0&#10;\num_squash_per_cycle&#61;4&#10;\pma_checker&#61;system.cpu.mmu.pma_checker&#10;\pmp&#61;system.cpu.mmu.pmp&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.mmu.itb.walker.power_state&#10;\system&#61;system";
 system_cpu_mmu_itb_walker_port [color="#000000", fillcolor="#6a6863", fontcolor="#000000", fontname=Arial, fontsize=14, label=port, shape=box, style="rounded, filled"];
 subgraph cluster_system_cpu_mmu_itb_walker_power_state {
 color="#000000";
@@ -111,7 +159,7 @@ fontsize=14;
 label="walker \n: RiscvPagetableWalker";
 shape=box;
 style="rounded, filled";
-tooltip="clk_domain&#61;system.cpu_clk_domain&#10;\eventq_index&#61;0&#10;\num_squash_per_cycle&#61;4&#10;\pma_checker&#61;system.cpu.mmu.pma_checker&#10;\pmp&#61;system.cpu.mmu.pmp&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.mmu.dtb.walker.power_state&#10;\system&#61;system";
+tooltip="clk_domain&#61;system.clk_domain&#10;\eventq_index&#61;0&#10;\num_squash_per_cycle&#61;4&#10;\pma_checker&#61;system.cpu.mmu.pma_checker&#10;\pmp&#61;system.cpu.mmu.pmp&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.mmu.dtb.walker.power_state&#10;\system&#61;system";
 system_cpu_mmu_dtb_walker_port [color="#000000", fillcolor="#6a6863", fontcolor="#000000", fontname=Arial, fontsize=14, label=port, shape=box, style="rounded, filled"];
 subgraph cluster_system_cpu_mmu_dtb_walker_power_state {
 color="#000000";
@@ -1544,7 +1592,7 @@ fontsize=14;
 label="icache \n: L1_ICache";
 shape=box;
 style="rounded, filled";
-tooltip="addr_ranges&#61;0:18446744073709551615&#10;\assoc&#61;2&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\clusivity&#61;mostly_incl&#10;\compressor&#61;Null&#10;\data_latency&#61;2&#10;\demand_mshr_reserve&#61;1&#10;\eventq_index&#61;0&#10;\is_read_only&#61;true&#10;\max_miss_count&#61;0&#10;\move_contractions&#61;true&#10;\mshrs&#61;4&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.icache.power_state&#10;\prefetch_on_access&#61;false&#10;\prefetch_on_pf_hit&#61;false&#10;\prefetcher&#61;Null&#10;\replace_expansions&#61;true&#10;\replacement_policy&#61;system.cpu.icache.replacement_policy&#10;\response_latency&#61;2&#10;\sequential_access&#61;false&#10;\size&#61;262144&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\tags&#61;system.cpu.icache.tags&#10;\tgts_per_mshr&#61;20&#10;\warmup_percentage&#61;0&#10;\write_allocator&#61;Null&#10;\write_buffers&#61;8&#10;\writeback_clean&#61;true";
+tooltip="addr_ranges&#61;0:18446744073709551615&#10;\assoc&#61;2&#10;\clk_domain&#61;system.clk_domain&#10;\clusivity&#61;mostly_incl&#10;\compressor&#61;Null&#10;\data_latency&#61;2&#10;\demand_mshr_reserve&#61;1&#10;\eventq_index&#61;0&#10;\is_read_only&#61;true&#10;\max_miss_count&#61;0&#10;\move_contractions&#61;true&#10;\mshrs&#61;4&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.icache.power_state&#10;\prefetch_on_access&#61;false&#10;\prefetch_on_pf_hit&#61;false&#10;\prefetcher&#61;Null&#10;\replace_expansions&#61;true&#10;\replacement_policy&#61;system.cpu.icache.replacement_policy&#10;\response_latency&#61;2&#10;\sequential_access&#61;false&#10;\size&#61;1048576&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\tags&#61;system.cpu.icache.tags&#10;\tgts_per_mshr&#61;20&#10;\warmup_percentage&#61;0&#10;\write_allocator&#61;Null&#10;\write_buffers&#61;8&#10;\writeback_clean&#61;true";
 system_cpu_icache_cpu_side [color="#000000", fillcolor="#94918b", fontcolor="#000000", fontname=Arial, fontsize=14, label=cpu_side, shape=box, style="rounded, filled"];
 system_cpu_icache_mem_side [color="#000000", fillcolor="#94918b", fontcolor="#000000", fontname=Arial, fontsize=14, label=mem_side, shape=box, style="rounded, filled"];
 subgraph cluster_system_cpu_icache_tags {
@@ -1556,7 +1604,7 @@ fontsize=14;
 label="tags \n: BaseSetAssoc";
 shape=box;
 style="rounded, filled";
-tooltip="assoc&#61;2&#10;\block_size&#61;64&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\indexing_policy&#61;system.cpu.icache.tags.indexing_policy&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.icache.tags.power_state&#10;\replacement_policy&#61;system.cpu.icache.replacement_policy&#10;\sequential_access&#61;false&#10;\size&#61;262144&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\warmup_percentage&#61;0";
+tooltip="assoc&#61;2&#10;\block_size&#61;64&#10;\clk_domain&#61;system.clk_domain&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\indexing_policy&#61;system.cpu.icache.tags.indexing_policy&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.icache.tags.power_state&#10;\replacement_policy&#61;system.cpu.icache.replacement_policy&#10;\sequential_access&#61;false&#10;\size&#61;1048576&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\warmup_percentage&#61;0";
 subgraph cluster_system_cpu_icache_tags_indexing_policy {
 color="#000000";
 fillcolor="#84827c";
@@ -1566,7 +1614,7 @@ fontsize=14;
 label="indexing_policy \n: SetAssociative";
 shape=box;
 style="rounded, filled";
-tooltip="assoc&#61;2&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\size&#61;262144";
+tooltip="assoc&#61;2&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\size&#61;1048576";
 }
 
 subgraph cluster_system_cpu_icache_tags_power_state {
@@ -1618,7 +1666,7 @@ fontsize=14;
 label="dcache \n: L1_DCache";
 shape=box;
 style="rounded, filled";
-tooltip="addr_ranges&#61;0:18446744073709551615&#10;\assoc&#61;2&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\clusivity&#61;mostly_incl&#10;\compressor&#61;Null&#10;\data_latency&#61;2&#10;\demand_mshr_reserve&#61;1&#10;\eventq_index&#61;0&#10;\is_read_only&#61;false&#10;\max_miss_count&#61;0&#10;\move_contractions&#61;true&#10;\mshrs&#61;4&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.dcache.power_state&#10;\prefetch_on_access&#61;false&#10;\prefetch_on_pf_hit&#61;false&#10;\prefetcher&#61;Null&#10;\replace_expansions&#61;true&#10;\replacement_policy&#61;system.cpu.dcache.replacement_policy&#10;\response_latency&#61;2&#10;\sequential_access&#61;false&#10;\size&#61;262144&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\tags&#61;system.cpu.dcache.tags&#10;\tgts_per_mshr&#61;20&#10;\warmup_percentage&#61;0&#10;\write_allocator&#61;Null&#10;\write_buffers&#61;8&#10;\writeback_clean&#61;false";
+tooltip="addr_ranges&#61;0:18446744073709551615&#10;\assoc&#61;2&#10;\clk_domain&#61;system.clk_domain&#10;\clusivity&#61;mostly_incl&#10;\compressor&#61;Null&#10;\data_latency&#61;2&#10;\demand_mshr_reserve&#61;1&#10;\eventq_index&#61;0&#10;\is_read_only&#61;false&#10;\max_miss_count&#61;0&#10;\move_contractions&#61;true&#10;\mshrs&#61;4&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.dcache.power_state&#10;\prefetch_on_access&#61;false&#10;\prefetch_on_pf_hit&#61;false&#10;\prefetcher&#61;Null&#10;\replace_expansions&#61;true&#10;\replacement_policy&#61;system.cpu.dcache.replacement_policy&#10;\response_latency&#61;2&#10;\sequential_access&#61;false&#10;\size&#61;1048576&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\tags&#61;system.cpu.dcache.tags&#10;\tgts_per_mshr&#61;20&#10;\warmup_percentage&#61;0&#10;\write_allocator&#61;Null&#10;\write_buffers&#61;8&#10;\writeback_clean&#61;false";
 system_cpu_dcache_cpu_side [color="#000000", fillcolor="#94918b", fontcolor="#000000", fontname=Arial, fontsize=14, label=cpu_side, shape=box, style="rounded, filled"];
 system_cpu_dcache_mem_side [color="#000000", fillcolor="#94918b", fontcolor="#000000", fontname=Arial, fontsize=14, label=mem_side, shape=box, style="rounded, filled"];
 subgraph cluster_system_cpu_dcache_tags {
@@ -1630,7 +1678,7 @@ fontsize=14;
 label="tags \n: BaseSetAssoc";
 shape=box;
 style="rounded, filled";
-tooltip="assoc&#61;2&#10;\block_size&#61;64&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\indexing_policy&#61;system.cpu.dcache.tags.indexing_policy&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.dcache.tags.power_state&#10;\replacement_policy&#61;system.cpu.dcache.replacement_policy&#10;\sequential_access&#61;false&#10;\size&#61;262144&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\warmup_percentage&#61;0";
+tooltip="assoc&#61;2&#10;\block_size&#61;64&#10;\clk_domain&#61;system.clk_domain&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\indexing_policy&#61;system.cpu.dcache.tags.indexing_policy&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.dcache.tags.power_state&#10;\replacement_policy&#61;system.cpu.dcache.replacement_policy&#10;\sequential_access&#61;false&#10;\size&#61;1048576&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\warmup_percentage&#61;0";
 subgraph cluster_system_cpu_dcache_tags_indexing_policy {
 color="#000000";
 fillcolor="#84827c";
@@ -1640,7 +1688,7 @@ fontsize=14;
 label="indexing_policy \n: SetAssociative";
 shape=box;
 style="rounded, filled";
-tooltip="assoc&#61;2&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\size&#61;262144";
+tooltip="assoc&#61;2&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\size&#61;1048576";
 }
 
 subgraph cluster_system_cpu_dcache_tags_power_state {
@@ -1692,7 +1740,7 @@ fontsize=14;
 label="itb_walker_cache \n: PageTableWalkerCache";
 shape=box;
 style="rounded, filled";
-tooltip="addr_ranges&#61;0:18446744073709551615&#10;\assoc&#61;2&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\clusivity&#61;mostly_incl&#10;\compressor&#61;Null&#10;\data_latency&#61;2&#10;\demand_mshr_reserve&#61;1&#10;\eventq_index&#61;0&#10;\is_read_only&#61;false&#10;\max_miss_count&#61;0&#10;\move_contractions&#61;true&#10;\mshrs&#61;10&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.itb_walker_cache.power_state&#10;\prefetch_on_access&#61;false&#10;\prefetch_on_pf_hit&#61;false&#10;\prefetcher&#61;Null&#10;\replace_expansions&#61;true&#10;\replacement_policy&#61;system.cpu.itb_walker_cache.replacement_policy&#10;\response_latency&#61;2&#10;\sequential_access&#61;false&#10;\size&#61;1024&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\tags&#61;system.cpu.itb_walker_cache.tags&#10;\tgts_per_mshr&#61;12&#10;\warmup_percentage&#61;0&#10;\write_allocator&#61;Null&#10;\write_buffers&#61;8&#10;\writeback_clean&#61;false";
+tooltip="addr_ranges&#61;0:18446744073709551615&#10;\assoc&#61;2&#10;\clk_domain&#61;system.clk_domain&#10;\clusivity&#61;mostly_incl&#10;\compressor&#61;Null&#10;\data_latency&#61;2&#10;\demand_mshr_reserve&#61;1&#10;\eventq_index&#61;0&#10;\is_read_only&#61;false&#10;\max_miss_count&#61;0&#10;\move_contractions&#61;true&#10;\mshrs&#61;10&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.itb_walker_cache.power_state&#10;\prefetch_on_access&#61;false&#10;\prefetch_on_pf_hit&#61;false&#10;\prefetcher&#61;Null&#10;\replace_expansions&#61;true&#10;\replacement_policy&#61;system.cpu.itb_walker_cache.replacement_policy&#10;\response_latency&#61;2&#10;\sequential_access&#61;false&#10;\size&#61;1024&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\tags&#61;system.cpu.itb_walker_cache.tags&#10;\tgts_per_mshr&#61;12&#10;\warmup_percentage&#61;0&#10;\write_allocator&#61;Null&#10;\write_buffers&#61;8&#10;\writeback_clean&#61;false";
 system_cpu_itb_walker_cache_cpu_side [color="#000000", fillcolor="#94918b", fontcolor="#000000", fontname=Arial, fontsize=14, label=cpu_side, shape=box, style="rounded, filled"];
 system_cpu_itb_walker_cache_mem_side [color="#000000", fillcolor="#94918b", fontcolor="#000000", fontname=Arial, fontsize=14, label=mem_side, shape=box, style="rounded, filled"];
 subgraph cluster_system_cpu_itb_walker_cache_tags {
@@ -1704,7 +1752,7 @@ fontsize=14;
 label="tags \n: BaseSetAssoc";
 shape=box;
 style="rounded, filled";
-tooltip="assoc&#61;2&#10;\block_size&#61;64&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\indexing_policy&#61;system.cpu.itb_walker_cache.tags.indexing_policy&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.itb_walker_cache.tags.power_state&#10;\replacement_policy&#61;system.cpu.itb_walker_cache.replacement_policy&#10;\sequential_access&#61;false&#10;\size&#61;1024&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\warmup_percentage&#61;0";
+tooltip="assoc&#61;2&#10;\block_size&#61;64&#10;\clk_domain&#61;system.clk_domain&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\indexing_policy&#61;system.cpu.itb_walker_cache.tags.indexing_policy&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.itb_walker_cache.tags.power_state&#10;\replacement_policy&#61;system.cpu.itb_walker_cache.replacement_policy&#10;\sequential_access&#61;false&#10;\size&#61;1024&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\warmup_percentage&#61;0";
 subgraph cluster_system_cpu_itb_walker_cache_tags_indexing_policy {
 color="#000000";
 fillcolor="#84827c";
@@ -1766,7 +1814,7 @@ fontsize=14;
 label="dtb_walker_cache \n: PageTableWalkerCache";
 shape=box;
 style="rounded, filled";
-tooltip="addr_ranges&#61;0:18446744073709551615&#10;\assoc&#61;2&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\clusivity&#61;mostly_incl&#10;\compressor&#61;Null&#10;\data_latency&#61;2&#10;\demand_mshr_reserve&#61;1&#10;\eventq_index&#61;0&#10;\is_read_only&#61;false&#10;\max_miss_count&#61;0&#10;\move_contractions&#61;true&#10;\mshrs&#61;10&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.dtb_walker_cache.power_state&#10;\prefetch_on_access&#61;false&#10;\prefetch_on_pf_hit&#61;false&#10;\prefetcher&#61;Null&#10;\replace_expansions&#61;true&#10;\replacement_policy&#61;system.cpu.dtb_walker_cache.replacement_policy&#10;\response_latency&#61;2&#10;\sequential_access&#61;false&#10;\size&#61;1024&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\tags&#61;system.cpu.dtb_walker_cache.tags&#10;\tgts_per_mshr&#61;12&#10;\warmup_percentage&#61;0&#10;\write_allocator&#61;Null&#10;\write_buffers&#61;8&#10;\writeback_clean&#61;false";
+tooltip="addr_ranges&#61;0:18446744073709551615&#10;\assoc&#61;2&#10;\clk_domain&#61;system.clk_domain&#10;\clusivity&#61;mostly_incl&#10;\compressor&#61;Null&#10;\data_latency&#61;2&#10;\demand_mshr_reserve&#61;1&#10;\eventq_index&#61;0&#10;\is_read_only&#61;false&#10;\max_miss_count&#61;0&#10;\move_contractions&#61;true&#10;\mshrs&#61;10&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.dtb_walker_cache.power_state&#10;\prefetch_on_access&#61;false&#10;\prefetch_on_pf_hit&#61;false&#10;\prefetcher&#61;Null&#10;\replace_expansions&#61;true&#10;\replacement_policy&#61;system.cpu.dtb_walker_cache.replacement_policy&#10;\response_latency&#61;2&#10;\sequential_access&#61;false&#10;\size&#61;1024&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\tags&#61;system.cpu.dtb_walker_cache.tags&#10;\tgts_per_mshr&#61;12&#10;\warmup_percentage&#61;0&#10;\write_allocator&#61;Null&#10;\write_buffers&#61;8&#10;\writeback_clean&#61;false";
 system_cpu_dtb_walker_cache_cpu_side [color="#000000", fillcolor="#94918b", fontcolor="#000000", fontname=Arial, fontsize=14, label=cpu_side, shape=box, style="rounded, filled"];
 system_cpu_dtb_walker_cache_mem_side [color="#000000", fillcolor="#94918b", fontcolor="#000000", fontname=Arial, fontsize=14, label=mem_side, shape=box, style="rounded, filled"];
 subgraph cluster_system_cpu_dtb_walker_cache_tags {
@@ -1778,7 +1826,7 @@ fontsize=14;
 label="tags \n: BaseSetAssoc";
 shape=box;
 style="rounded, filled";
-tooltip="assoc&#61;2&#10;\block_size&#61;64&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\indexing_policy&#61;system.cpu.dtb_walker_cache.tags.indexing_policy&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.dtb_walker_cache.tags.power_state&#10;\replacement_policy&#61;system.cpu.dtb_walker_cache.replacement_policy&#10;\sequential_access&#61;false&#10;\size&#61;1024&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\warmup_percentage&#61;0";
+tooltip="assoc&#61;2&#10;\block_size&#61;64&#10;\clk_domain&#61;system.clk_domain&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\indexing_policy&#61;system.cpu.dtb_walker_cache.tags.indexing_policy&#10;\power_model&#61;&#10;\power_state&#61;system.cpu.dtb_walker_cache.tags.power_state&#10;\replacement_policy&#61;system.cpu.dtb_walker_cache.replacement_policy&#10;\sequential_access&#61;false&#10;\size&#61;1024&#10;\system&#61;system&#10;\tag_latency&#61;2&#10;\warmup_percentage&#61;0";
 subgraph cluster_system_cpu_dtb_walker_cache_tags_indexing_policy {
 color="#000000";
 fillcolor="#84827c";
@@ -1845,54 +1893,6 @@ tooltip="eventq_index&#61;0";
 
 }
 
-subgraph cluster_system_voltage_domain {
-color="#000000";
-fillcolor="#bab6ae";
-fontcolor="#000000";
-fontname=Arial;
-fontsize=14;
-label="voltage_domain \n: VoltageDomain";
-shape=box;
-style="rounded, filled";
-tooltip="eventq_index&#61;0&#10;\voltage&#61;1.0";
-}
-
-subgraph cluster_system_clk_domain {
-color="#000000";
-fillcolor="#bab6ae";
-fontcolor="#000000";
-fontname=Arial;
-fontsize=14;
-label="clk_domain \n: SrcClockDomain";
-shape=box;
-style="rounded, filled";
-tooltip="clock&#61;1000&#10;\domain_id&#61;-1&#10;\eventq_index&#61;0&#10;\init_perf_level&#61;0&#10;\voltage_domain&#61;system.voltage_domain";
-}
-
-subgraph cluster_system_cpu_voltage_domain {
-color="#000000";
-fillcolor="#bab6ae";
-fontcolor="#000000";
-fontname=Arial;
-fontsize=14;
-label="cpu_voltage_domain \n: VoltageDomain";
-shape=box;
-style="rounded, filled";
-tooltip="eventq_index&#61;0&#10;\voltage&#61;1.0";
-}
-
-subgraph cluster_system_cpu_clk_domain {
-color="#000000";
-fillcolor="#bab6ae";
-fontcolor="#000000";
-fontname=Arial;
-fontsize=14;
-label="cpu_clk_domain \n: SrcClockDomain";
-shape=box;
-style="rounded, filled";
-tooltip="clock&#61;500&#10;\domain_id&#61;-1&#10;\eventq_index&#61;0&#10;\init_perf_level&#61;0&#10;\voltage_domain&#61;system.cpu_voltage_domain";
-}
-
 subgraph cluster_system_membus {
 color="#000000";
 fillcolor="#6f798c";
@@ -1940,7 +1940,7 @@ fontsize=14;
 label="l2 \n: L2Cache";
 shape=box;
 style="rounded, filled";
-tooltip="addr_ranges&#61;0:18446744073709551615&#10;\assoc&#61;1&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\clusivity&#61;mostly_incl&#10;\compressor&#61;Null&#10;\data_latency&#61;20&#10;\demand_mshr_reserve&#61;1&#10;\eventq_index&#61;0&#10;\is_read_only&#61;false&#10;\max_miss_count&#61;0&#10;\move_contractions&#61;true&#10;\mshrs&#61;20&#10;\power_model&#61;&#10;\power_state&#61;system.l2.power_state&#10;\prefetch_on_access&#61;false&#10;\prefetch_on_pf_hit&#61;false&#10;\prefetcher&#61;Null&#10;\replace_expansions&#61;true&#10;\replacement_policy&#61;system.l2.replacement_policy&#10;\response_latency&#61;20&#10;\sequential_access&#61;false&#10;\size&#61;262144&#10;\system&#61;system&#10;\tag_latency&#61;20&#10;\tags&#61;system.l2.tags&#10;\tgts_per_mshr&#61;12&#10;\warmup_percentage&#61;0&#10;\write_allocator&#61;Null&#10;\write_buffers&#61;8&#10;\writeback_clean&#61;false";
+tooltip="addr_ranges&#61;0:18446744073709551615&#10;\assoc&#61;1&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\clusivity&#61;mostly_incl&#10;\compressor&#61;Null&#10;\data_latency&#61;20&#10;\demand_mshr_reserve&#61;1&#10;\eventq_index&#61;0&#10;\is_read_only&#61;false&#10;\max_miss_count&#61;0&#10;\move_contractions&#61;true&#10;\mshrs&#61;20&#10;\power_model&#61;&#10;\power_state&#61;system.l2.power_state&#10;\prefetch_on_access&#61;false&#10;\prefetch_on_pf_hit&#61;false&#10;\prefetcher&#61;Null&#10;\replace_expansions&#61;true&#10;\replacement_policy&#61;system.l2.replacement_policy&#10;\response_latency&#61;20&#10;\sequential_access&#61;false&#10;\size&#61;1048576&#10;\system&#61;system&#10;\tag_latency&#61;20&#10;\tags&#61;system.l2.tags&#10;\tgts_per_mshr&#61;12&#10;\warmup_percentage&#61;0&#10;\write_allocator&#61;Null&#10;\write_buffers&#61;8&#10;\writeback_clean&#61;false";
 system_l2_cpu_side [color="#000000", fillcolor="#94918b", fontcolor="#000000", fontname=Arial, fontsize=14, label=cpu_side, shape=box, style="rounded, filled"];
 system_l2_mem_side [color="#000000", fillcolor="#94918b", fontcolor="#000000", fontname=Arial, fontsize=14, label=mem_side, shape=box, style="rounded, filled"];
 subgraph cluster_system_l2_tags {
@@ -1952,7 +1952,7 @@ fontsize=14;
 label="tags \n: BaseSetAssoc";
 shape=box;
 style="rounded, filled";
-tooltip="assoc&#61;1&#10;\block_size&#61;64&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\indexing_policy&#61;system.l2.tags.indexing_policy&#10;\power_model&#61;&#10;\power_state&#61;system.l2.tags.power_state&#10;\replacement_policy&#61;system.l2.replacement_policy&#10;\sequential_access&#61;false&#10;\size&#61;262144&#10;\system&#61;system&#10;\tag_latency&#61;20&#10;\warmup_percentage&#61;0";
+tooltip="assoc&#61;1&#10;\block_size&#61;64&#10;\clk_domain&#61;system.cpu_clk_domain&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\indexing_policy&#61;system.l2.tags.indexing_policy&#10;\power_model&#61;&#10;\power_state&#61;system.l2.tags.power_state&#10;\replacement_policy&#61;system.l2.replacement_policy&#10;\sequential_access&#61;false&#10;\size&#61;1048576&#10;\system&#61;system&#10;\tag_latency&#61;20&#10;\warmup_percentage&#61;0";
 subgraph cluster_system_l2_tags_indexing_policy {
 color="#000000";
 fillcolor="#84827c";
@@ -1962,7 +1962,7 @@ fontsize=14;
 label="indexing_policy \n: SetAssociative";
 shape=box;
 style="rounded, filled";
-tooltip="assoc&#61;1&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\size&#61;262144";
+tooltip="assoc&#61;1&#10;\entry_size&#61;64&#10;\eventq_index&#61;0&#10;\size&#61;1048576";
 }
 
 subgraph cluster_system_l2_tags_power_state {
@@ -1979,18 +1979,6 @@ tooltip="clk_gate_bins&#61;20&#10;\clk_gate_max&#61;1000000000000&#10;\clk_gate_
 
 }
 
-subgraph cluster_system_l2_replacement_policy {
-color="#000000";
-fillcolor="#9f9c95";
-fontcolor="#000000";
-fontname=Arial;
-fontsize=14;
-label="replacement_policy \n: LRURP";
-shape=box;
-style="rounded, filled";
-tooltip="eventq_index&#61;0";
-}
-
 subgraph cluster_system_l2_power_state {
 color="#000000";
 fillcolor="#9f9c95";
@@ -2001,6 +1989,18 @@ label="power_state \n: PowerState";
 shape=box;
 style="rounded, filled";
 tooltip="clk_gate_bins&#61;20&#10;\clk_gate_max&#61;1000000000000&#10;\clk_gate_min&#61;1000&#10;\default_state&#61;UNDEFINED&#10;\eventq_index&#61;0&#10;\leaders&#61;&#10;\possible_states&#61;";
+}
+
+subgraph cluster_system_l2_replacement_policy {
+color="#000000";
+fillcolor="#9f9c95";
+fontcolor="#000000";
+fontname=Arial;
+fontsize=14;
+label="replacement_policy \n: LRURP";
+shape=box;
+style="rounded, filled";
+tooltip="eventq_index&#61;0";
 }
 
 }

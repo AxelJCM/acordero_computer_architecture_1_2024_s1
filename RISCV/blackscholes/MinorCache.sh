@@ -2,7 +2,7 @@
 export GEM5_DIR=/home/axeljcm/Documents/GEM5/gem5/
 export CACHE_DIR=/CPUs/MinorCPU/RISCV/PARSEC/Benchmarks/CacheBM
 export CACHE_STATS=/CPUs/MinorCPU/RISCV/PARSEC/CacheStats
-export BENCHMARK=./src/blacksholes
+export BENCHMARK=./src/blackscholes
 export INPUT_FILE=./inputs/test.txt
 export OUTPUT_FILE=./inputs/output.txt
 export ARGUMENT="1 $INPUT_FILE $OUTPUT_FILE"
