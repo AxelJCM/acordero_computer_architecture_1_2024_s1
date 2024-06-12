@@ -232,7 +232,7 @@ class CPUConfigGUI:
         spec_label.pack(pady=10)
 
         cache_frame, cache_checkboxes = self.create_checkbox_frame(
-            master, "Cache Size:", ["4kB", "16kB", "64kB", "256kB", "1MB"], 
+            master, "Cache Size:", ["2kB", "16kB", "64kB", "256kB", "1MB"], 
             [path.replace("MinorCPU", cpu_type) for path in logic.cache_paths[cpu_type]], arch_var
         )
         cache_frame.pack(pady=5)
