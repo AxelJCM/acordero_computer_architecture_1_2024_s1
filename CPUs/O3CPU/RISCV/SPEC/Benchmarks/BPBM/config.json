@@ -189,7 +189,7 @@
                 "cacheLoadPorts": 200,
                 "cacheStorePorts": 200,
                 "checker": null,
-                "clk_domain": "system.clk_domain",
+                "clk_domain": "system.cpu_clk_domain",
                 "commitToDecodeDelay": 1,
                 "commitToFetchDelay": 1,
                 "commitToIEWDelay": 1,
@@ -869,7 +869,7 @@
                             "cxx_class": "gem5::RiscvISA::Walker",
                             "name": "walker",
                             "path": "system.cpu.mmu.dtb.walker",
-                            "clk_domain": "system.clk_domain",
+                            "clk_domain": "system.cpu_clk_domain",
                             "eventq_index": 0,
                             "num_squash_per_cycle": 4,
                             "pma_checker": "system.cpu.mmu.pma_checker",
@@ -913,7 +913,7 @@
                             "cxx_class": "gem5::RiscvISA::Walker",
                             "name": "walker",
                             "path": "system.cpu.mmu.itb.walker",
-                            "clk_domain": "system.clk_domain",
+                            "clk_domain": "system.cpu_clk_domain",
                             "eventq_index": 0,
                             "num_squash_per_cycle": 4,
                             "pma_checker": "system.cpu.mmu.pma_checker",
@@ -1061,7 +1061,7 @@
                         "0:18446744073709551615"
                     ],
                     "assoc": 2,
-                    "clk_domain": "system.clk_domain",
+                    "clk_domain": "system.cpu_clk_domain",
                     "clusivity": "mostly_incl",
                     "compressor": null,
                     "data_latency": 2,
@@ -1108,7 +1108,7 @@
                         "path": "system.cpu.dcache.tags",
                         "assoc": 2,
                         "block_size": 64,
-                        "clk_domain": "system.clk_domain",
+                        "clk_domain": "system.cpu_clk_domain",
                         "entry_size": 64,
                         "eventq_index": 0,
                         "indexing_policy": {
@@ -1167,7 +1167,7 @@
                         "0:18446744073709551615"
                     ],
                     "assoc": 2,
-                    "clk_domain": "system.clk_domain",
+                    "clk_domain": "system.cpu_clk_domain",
                     "clusivity": "mostly_incl",
                     "compressor": null,
                     "data_latency": 2,
@@ -1214,7 +1214,7 @@
                         "path": "system.cpu.dtb_walker_cache.tags",
                         "assoc": 2,
                         "block_size": 64,
-                        "clk_domain": "system.clk_domain",
+                        "clk_domain": "system.cpu_clk_domain",
                         "entry_size": 64,
                         "eventq_index": 0,
                         "indexing_policy": {
@@ -1273,7 +1273,7 @@
                         "0:18446744073709551615"
                     ],
                     "assoc": 2,
-                    "clk_domain": "system.clk_domain",
+                    "clk_domain": "system.cpu_clk_domain",
                     "clusivity": "mostly_incl",
                     "compressor": null,
                     "data_latency": 2,
@@ -1320,7 +1320,7 @@
                         "path": "system.cpu.icache.tags",
                         "assoc": 2,
                         "block_size": 64,
-                        "clk_domain": "system.clk_domain",
+                        "clk_domain": "system.cpu_clk_domain",
                         "entry_size": 64,
                         "eventq_index": 0,
                         "indexing_policy": {
@@ -1379,7 +1379,7 @@
                         "0:18446744073709551615"
                     ],
                     "assoc": 2,
-                    "clk_domain": "system.clk_domain",
+                    "clk_domain": "system.cpu_clk_domain",
                     "clusivity": "mostly_incl",
                     "compressor": null,
                     "data_latency": 2,
@@ -1426,7 +1426,7 @@
                         "path": "system.cpu.itb_walker_cache.tags",
                         "assoc": 2,
                         "block_size": 64,
-                        "clk_domain": "system.clk_domain",
+                        "clk_domain": "system.cpu_clk_domain",
                         "entry_size": 64,
                         "eventq_index": 0,
                         "indexing_policy": {

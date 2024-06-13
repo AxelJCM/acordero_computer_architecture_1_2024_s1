@@ -80,20 +80,27 @@ class CPUConfigLogic:
             messagebox.showerror("Error", f"Error reading file: {e}")
         return stats
 
-    def plot_stats(self, stats_list, labels, metrics, title):
+    def plot_stats(self, stats_list, labels, metrics, title, callback=None):
         values = [[stats.get(metric, 0) for metric in metrics] for stats in stats_list]
         
         x = range(len(metrics))
         
-        plt.figure(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=(10, 6))
         for i, val in enumerate(values):
-            plt.bar([p + i * 0.2 for p in x], val, width=0.2, label=labels[i])
+            ax.bar([p + i * 0.2 for p in x], val, width=0.2, label=labels[i])
         
-        plt.xticks([p + 0.2 for p in x], metrics, rotation='vertical')
-        plt.ylabel('Value')
-        plt.title(title)
-        plt.legend()
+        ax.set_xticks([p + 0.2 for p in x])
+        ax.set_xticklabels(metrics, rotation='vertical')
+        ax.set_ylabel('Value')
+        ax.set_title(title)
+        ax.legend()
         plt.tight_layout()
+        
+        def on_close(event):
+            if callback:
+                callback()
+
+        fig.canvas.mpl_connect('close_event', on_close)
         plt.show()
 
     def on_play_button_click(self, checkboxes, label, arch_var):
@@ -103,14 +110,17 @@ class CPUConfigLogic:
             modified_path = path.replace("RISCV", selected_arch).replace("ARM", selected_arch)
             if var.get() and os.path.exists(modified_path):
                 selected_paths.append(modified_path)
+        
         if selected_paths:
             stats_list = []
             for path in selected_paths:
                 stats = self.read_stats_file(path)
                 if stats:
                     stats_list.append(stats)
+
             if stats_list:
                 section = label.cget('text')
+                
                 if section == "Replacement Policy:":
                     metrics = [
                         'system.l2.overallHits::total',
@@ -118,6 +128,7 @@ class CPUConfigLogic:
                         'system.l2.replacements'
                     ]
                     self.plot_stats(stats_list, selected_paths, metrics, 'Comparison of Replacement Policy Stats')
+                
                 elif section == "Branch Predictor:":
                     metrics = [
                         'system.cpu.branchPred.lookups',
@@ -128,21 +139,26 @@ class CPUConfigLogic:
                         'system.cpu.branchPred.BTBHits'
                     ]
                     self.plot_stats(stats_list, selected_paths, metrics, 'Comparison of Branch Predictor Stats')
+                
                 elif section == "Cache Size:":
+                    # First, plot metrics 1
                     metrics1 = [
                         'system.cpu.dcache.overallHits::total',
                         'system.cpu.icache.overallHits::total'
                     ]
-                    metrics2 = [
-                        'system.cpu.cpi',
-                        'system.cpu.ipc'
-                    ]
-                    self.plot_stats(stats_list, selected_paths, metrics1, 'Comparison of Cache Misses and Hits Stats')
-                    self.plot_stats(stats_list, selected_paths, metrics2, 'Comparison of CPU Performance Stats')
+                    self.plot_stats(stats_list, selected_paths, metrics1, 'Comparison of Cache Misses and Hits Stats', callback=lambda: self.plot_metrics_2(stats_list, selected_paths))
+
             else:
                 messagebox.showerror("Error", f"Failed to read stats from the selected files in {label.cget('text')}.")
         else:
             messagebox.showerror("Error", f"No valid files selected in {label.cget('text')}.")
+
+    def plot_metrics_2(self, stats_list, selected_paths):
+        metrics2 = [
+            'system.cpu.cpi',
+            'system.cpu.ipc'
+        ]
+        self.plot_stats(stats_list, selected_paths, metrics2, 'Comparison of CPU Performance Stats')
 
     def update_paths(self, cpu_type):
         self.cpu_type = cpu_type
@@ -183,13 +199,13 @@ class CPUConfigGUI:
         selected_tab = event.widget.tab(event.widget.index("current"))["text"]
         self.logic.update_paths(selected_tab)
 
-    def add_dropdown(self, master):
-        label = ttk.Label(master, text="Seleccionar arquitectura:", font=('Helvetica', 10, 'bold'))
-        label.pack(pady=10)
-
+    def add_dropdown(self, frame):
         options = ["ARM", "RISCV"]
         selected_option = tk.StringVar(value=options[0])
-        dropdown = ttk.OptionMenu(master, selected_option, *options)
+
+        label = ttk.Label(frame, text="Arquitectura:")
+        label.pack(pady=5)
+        dropdown = ttk.OptionMenu(frame, selected_option, options[0], *options)
         dropdown.pack(pady=5)
 
         def reset_options(*args):
@@ -269,6 +285,7 @@ class CPUConfigGUI:
             [path.replace("SPEC", "PARSEC").replace("MinorCPU", cpu_type) for path in logic.branch_paths[cpu_type]], arch_var
         )
         branch_parsec_frame.pack(pady=5)
+
 
 # Crear la ventana principal
 root = tk.Tk()
